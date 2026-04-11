@@ -1,0 +1,12 @@
+services:
+  web:
+    build: . # Dockerfileをもとにイメージをビルド
+    ports:
+      - "3000:3000" # ホスト:コンテナのポートマッピング
+    volumes:
+      - .:/usr/src/app # ソースコードをコンテナにマウント（ホットリロード対応）
+      - /usr/src/app/node_modules # node_modulesはコンテナ側を使う（ホストと競合しないように）
+    env_file:
+      - .env.local # 環境変数を.env.localから読み込む
+    stdin_open: true # 標準入力を開いたままにする（コンテナ内でシェル操作が可能）
+    tty: true # 擬似端末を割り当てる（ログが見やすくなる）
