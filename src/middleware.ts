@@ -8,9 +8,10 @@ export async function middleware(request: NextRequest) {
 
   // Supabaseクライアントを作成し、セッションのCookieを更新する
   const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    (process.env.SUPABASE_URL ?? process.env.NEXT_PUBLIC_SUPABASE_URL)!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
+      cookieOptions: { name: "sb-stupomo" },
       cookies: {
         getAll() {
           return request.cookies.getAll();
@@ -34,7 +35,11 @@ export async function middleware(request: NextRequest) {
   } = await supabase.auth.getUser();
 
   // 未ログインユーザーが保護されたページにアクセスした場合はログインページへリダイレクト
-  if (!user && !request.nextUrl.pathname.startsWith("/login")) {
+  if (
+    !user &&
+    !request.nextUrl.pathname.startsWith("/login") &&
+    !request.nextUrl.pathname.startsWith("/auth")
+  ) {
     const url = request.nextUrl.clone();
     url.pathname = "/login";
     return NextResponse.redirect(url);
