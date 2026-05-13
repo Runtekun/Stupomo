@@ -76,12 +76,7 @@ supabase db push
 
 ---
 
-## 開発ルール
-
-- **コミットメッセージは日本語**
-- **ブランチ戦略**: 機能ごとにブランチを切る（例: `feature/auth`, `feature/timer`）
-- **PRテンプレート**: 概要・実装内容・動作確認の3つを日本語で記載
-- mainブランチへの直接pushは禁止
+@.claude/rules/dev-rules.md
 
 ---
 
