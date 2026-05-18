@@ -16,7 +16,11 @@ function formatTime(seconds: number): string {
   return `${m}:${s}`;
 }
 
-export default function PomodoroTimer() {
+type Props = {
+  todayMinutes: number;
+};
+
+export default function PomodoroTimer({ todayMinutes }: Props) {
   const workStartedAtRef = useRef<string | null>(null);
   const { playChime } = useSound();
 
@@ -68,6 +72,11 @@ export default function PomodoroTimer() {
       }}
     >
       <div className="text-center">
+        {/* 今日の学習合計 */}
+        <p className="mb-6 text-sm font-semibold text-indigo-500 tracking-wide">
+          今日の学習 {todayMinutes}分
+        </p>
+
         {/* 円形プログレスリング */}
         <div
           className="relative mx-auto mb-4"

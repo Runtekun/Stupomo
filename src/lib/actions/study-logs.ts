@@ -1,6 +1,7 @@
 "use server";
 
 import { createClient } from "@/lib/supabase/server";
+import { revalidatePath } from "next/cache";
 
 export async function saveStudyLog(startedAt: string, endedAt: string) {
   const supabase = await createClient();
@@ -42,4 +43,6 @@ export async function saveStudyLog(startedAt: string, endedAt: string) {
       total_minutes: 25,
     });
   }
+
+  revalidatePath("/timer");
 }
