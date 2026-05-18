@@ -72,6 +72,11 @@ export default function PomodoroTimer({ todayMinutes }: Props) {
       }}
     >
       <div className="text-center">
+        {/* 今日の学習合計 */}
+        <p className="mb-6 text-sm font-semibold text-indigo-500 tracking-wide">
+          今日の学習 {todayMinutes}分
+        </p>
+
         {/* 円形プログレスリング */}
         <div
           className="relative mx-auto mb-4"
@@ -111,16 +116,10 @@ export default function PomodoroTimer({ todayMinutes }: Props) {
         </div>
 
         {/* セッションカウンター */}
-        <p className="mb-2 text-sm text-gray-500">
+        <p className="mb-6 text-sm text-gray-500">
           セット{" "}
           <span className="font-bold text-gray-900">{state.sessionCount}</span>{" "}
           / 4
-        </p>
-
-        {/* 今日の学習時間 */}
-        <p className="mb-6 text-sm text-gray-500">
-          今日の学習時間:{" "}
-          <span className="font-bold text-gray-900">{todayMinutes}</span> 分
         </p>
 
         {/* ボタン */}
